@@ -1,6 +1,6 @@
 use std::sync::Arc;
+use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
-use chrono::{DateTime, Utc};
 use futures_util::lock::Mutex;
 use serde::{Serialize, Serializer, ser::SerializeMap};
 
@@ -17,9 +17,8 @@ struct ResolveState {
     field_name: String,
     parent_type: String,
     return_type: String,
-    start_time: DateTime<Utc>,
-    end_time: DateTime<Utc>,
-    start_offset: i64,
+    start_offset: u128,
+    duration_ns: u128,
 }
 
 impl Serialize for ResolveState {
@@ -30,12 +29,43 @@ impl Serialize for ResolveState {
         map.serialize_entry("parentType", &self.parent_type)?;
         map.serialize_entry("returnType", &self.return_type)?;
         map.serialize_entry("startOffset", &self.start_offset)?;
-        map.serialize_entry(
-            "duration",
-            &(self.end_time - self.start_time).num_nanoseconds(),
-        )?;
+        map.serialize_entry("duration", &self.duration_ns)?;
         map.end()
     }
+}
+
+fn system_time_to_rfc3339(t: SystemTime) -> String {
+    let duration = t.duration_since(UNIX_EPOCH).unwrap_or(Duration::ZERO);
+    let secs = duration.as_secs();
+    let nanos = duration.subsec_nanos();
+    // Format as RFC3339 UTC timestamp
+    let (y, mo, d, h, mi, s) = seconds_to_datetime(secs);
+    format!(
+        "{:04}-{:02}-{:02}T{:02}:{:02}:{:02}.{:09}Z",
+        y, mo, d, h, mi, s, nanos
+    )
+}
+
+fn seconds_to_datetime(secs: u64) -> (u64, u64, u64, u64, u64, u64) {
+    // Days since epoch
+    let days = secs / 86400;
+    let time = secs % 86400;
+    let h = time / 3600;
+    let mi = (time % 3600) / 60;
+    let s = time % 60;
+
+    // Gregorian calendar calculation
+    let z = days + 719468;
+    let era = z / 146097;
+    let doe = z - era * 146097;
+    let yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+    let y = yoe + era * 400;
+    let doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
+    let mp = (5 * doy + 2) / 153;
+    let d = doy - (153 * mp + 2) / 5 + 1;
+    let mo = if mp < 10 { mp + 3 } else { mp - 9 };
+    let y = if mo <= 2 { y + 1 } else { y };
+    (y, mo, d, h, mi, s)
 }
 
 /// Apollo tracing extension for performance tracing
@@ -53,8 +83,8 @@ impl ExtensionFactory for ApolloTracing {
     fn create(&self) -> Arc<dyn Extension> {
         Arc::new(ApolloTracingExtension {
             inner: Mutex::new(Inner {
-                start_time: Utc::now(),
-                end_time: Utc::now(),
+                start_time: SystemTime::now(),
+                end_time: SystemTime::now(),
                 resolves: Default::default(),
             }),
         })
@@ -62,8 +92,8 @@ impl ExtensionFactory for ApolloTracing {
 }
 
 struct Inner {
-    start_time: DateTime<Utc>,
-    end_time: DateTime<Utc>,
+    start_time: SystemTime,
+    end_time: SystemTime,
     resolves: Vec<ResolveState>,
 }
 
@@ -79,21 +109,28 @@ impl Extension for ApolloTracingExtension {
         operation_name: Option<&str>,
         next: NextExecute<'_>,
     ) -> Response {
-        self.inner.lock().await.start_time = Utc::now();
+        self.inner.lock().await.start_time = SystemTime::now();
         let resp = next.run(ctx, operation_name).await;
 
         let mut inner = self.inner.lock().await;
-        inner.end_time = Utc::now();
+        inner.end_time = SystemTime::now();
         inner
             .resolves
             .sort_by(|a, b| a.start_offset.cmp(&b.start_offset));
+
+        let duration_ns = inner
+            .end_time
+            .duration_since(inner.start_time)
+            .unwrap_or(Duration::ZERO)
+            .as_nanos();
+
         resp.extension(
             "tracing",
             value!({
                 "version": 1,
-                "startTime": inner.start_time.to_rfc3339(),
-                "endTime": inner.end_time.to_rfc3339(),
-                "duration": (inner.end_time - inner.start_time).num_nanoseconds(),
+                "startTime": system_time_to_rfc3339(inner.start_time),
+                "endTime": system_time_to_rfc3339(inner.end_time),
+                "duration": duration_ns,
                 "execution": {
                     "resolvers": inner.resolves
                 }
@@ -111,22 +148,25 @@ impl Extension for ApolloTracingExtension {
         let field_name = info.path_node.field_name().to_string();
         let parent_type = info.parent_type.to_string();
         let return_type = info.return_type.to_string();
-        let start_time = Utc::now();
-        let start_offset = (start_time - self.inner.lock().await.start_time)
-            .num_nanoseconds()
-            .unwrap();
+        let resolve_start = SystemTime::now();
+        let start_offset = resolve_start
+            .duration_since(self.inner.lock().await.start_time)
+            .unwrap_or(Duration::ZERO)
+            .as_nanos();
 
         let res = next.run(ctx, info).await;
-        let end_time = Utc::now();
+        let duration_ns = resolve_start
+            .elapsed()
+            .unwrap_or(Duration::ZERO)
+            .as_nanos();
 
         self.inner.lock().await.resolves.push(ResolveState {
             path,
             field_name,
             parent_type,
             return_type,
-            start_time,
-            end_time,
             start_offset,
+            duration_ns,
         });
         res
     }

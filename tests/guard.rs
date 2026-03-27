@@ -17,7 +17,6 @@ impl RoleGuard {
     }
 }
 
-#[cfg_attr(feature = "boxed-trait", async_trait::async_trait)]
 impl Guard for RoleGuard {
     async fn check(&self, ctx: &Context<'_>) -> Result<()> {
         if ctx.data_opt::<Role>() == Some(&self.role) {
@@ -40,7 +39,6 @@ impl<'a> UserGuard<'a> {
     }
 }
 
-#[cfg_attr(feature = "boxed-trait", async_trait::async_trait)]
 impl Guard for UserGuard<'_> {
     async fn check(&self, ctx: &Context<'_>) -> Result<()> {
         if ctx.data_opt::<Username>().map(|name| name.0.as_str()) == Some(self.username) {
@@ -296,7 +294,6 @@ pub async fn test_guard_use_params() {
         }
     }
 
-    #[cfg_attr(feature = "boxed-trait", async_trait::async_trait)]
     impl Guard for EqGuard {
         async fn check(&self, _ctx: &Context<'_>) -> Result<()> {
             if self.expect != self.actual {

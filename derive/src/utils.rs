@@ -376,12 +376,3 @@ fn extract_directive_call_path(directive: &Expr) -> Option<syn::Path> {
     None
 }
 
-pub fn gen_boxed_trait(crate_name: &syn::Path) -> TokenStream {
-    if cfg!(feature = "boxed-trait") {
-        quote! {
-            #[#crate_name::async_trait::async_trait]
-        }
-    } else {
-        quote! {}
-    }
-}

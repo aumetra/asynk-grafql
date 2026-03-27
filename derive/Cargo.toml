@@ -14,9 +14,6 @@ version = "8.0.0-rc.4"
 [lib]
 proc-macro = true
 
-[features]
-boxed-trait = []
-
 [dependencies]
 async-graphql-parser.workspace = true
 

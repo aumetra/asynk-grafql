@@ -4,7 +4,6 @@ use async_graphql_parser::types::Field;
 
 use crate::{ContextSelectionSet, OutputType, Positioned, ServerResult, Value, registry};
 
-#[cfg_attr(feature = "boxed-trait", async_trait::async_trait)]
 impl<T> OutputType for Cow<'_, T>
 where
     T: OutputType + ToOwned + ?Sized,

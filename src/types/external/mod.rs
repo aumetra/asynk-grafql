@@ -13,18 +13,10 @@ mod non_zero_integers;
 mod optional;
 mod string;
 
-#[cfg(feature = "chrono-tz")]
-mod chrono_tz;
-#[cfg(feature = "chrono")]
-mod datetime;
 #[cfg(feature = "decimal")]
 mod decimal;
-#[cfg(feature = "chrono-duration")]
-mod duration;
 #[cfg(feature = "jiff")]
 mod jiff;
-#[cfg(feature = "chrono")]
-mod naive_time;
 #[cfg(feature = "secrecy")]
 mod secrecy;
 #[cfg(feature = "time")]

@@ -1,8 +1,6 @@
-#![cfg(feature = "chrono")]
 #![allow(clippy::diverging_sub_expression)]
 
 use async_graphql::*;
-use chrono::{DateTime, Utc};
 use futures_util::stream::Stream;
 
 #[tokio::test]
@@ -134,48 +132,6 @@ pub async fn test_subscription() {
             .data,
         value!({
             "__type": { "description": "Haha" }
-        })
-    );
-}
-
-#[tokio::test]
-pub async fn test_override_description() {
-    /// Haha
-    #[derive(SimpleObject)]
-    struct Query {
-        value: i32,
-        value2: DateTime<Utc>,
-    }
-
-    let schema = Schema::build(
-        Query {
-            value: 100,
-            value2: Utc::now(),
-        },
-        EmptyMutation,
-        EmptySubscription,
-    )
-    .override_output_type_description::<Query>("Hehe")
-    .override_output_type_description::<DateTime<Utc>>("DT")
-    .finish();
-
-    assert_eq!(
-        schema
-            .execute(r#"{ __type(name: "Query") { description } }"#)
-            .await
-            .data,
-        value!({
-            "__type": { "description": "Hehe" }
-        })
-    );
-
-    assert_eq!(
-        schema
-            .execute(r#"{ __type(name: "DateTime") { description } }"#)
-            .await
-            .data,
-        value!({
-            "__type": { "description": "DT" }
         })
     );
 }

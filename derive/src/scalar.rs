@@ -5,7 +5,7 @@ use syn::ItemImpl;
 use crate::{
     args::{self, RenameTarget},
     utils::{
-        GeneratorResult, gen_boxed_trait, get_crate_path, get_rustdoc, get_type_path_and_name,
+        GeneratorResult, get_crate_path, get_rustdoc, get_type_path_and_name,
         visible_fn,
     },
 };
@@ -15,7 +15,6 @@ pub fn generate(
     item_impl: &mut ItemImpl,
 ) -> GeneratorResult<TokenStream> {
     let crate_name = get_crate_path(&scalar_args.crate_path, scalar_args.internal);
-    let boxed_trait = gen_boxed_trait(&crate_name);
     let self_name = get_type_path_and_name(item_impl.self_ty.as_ref())?.1;
     let gql_typename = if !scalar_args.name_type {
         let name = scalar_args
@@ -105,7 +104,6 @@ pub fn generate(
         }
 
         #[allow(clippy::all, clippy::pedantic)]
-        #boxed_trait
         impl #generic #crate_name::OutputType for #self_ty #where_clause {
             fn type_name() -> ::std::borrow::Cow<'static, ::std::primitive::str> {
                 #gql_typename
