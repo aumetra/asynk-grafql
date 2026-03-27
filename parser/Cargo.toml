@@ -1,18 +1,18 @@
 [package]
 authors = ["sunli <scott_s829@163.com>", "Koxiaet"]
 categories = ["network-programming", "asynchronous"]
-description = "GraphQL query parser for async-graphql"
-documentation = "https://docs.rs/async-graphql/"
+description = "GraphQL query parser for asynk-grafql"
+documentation = "https://docs.rs/asynk-grafql/"
 edition = "2024"
-homepage = "https://github.com/async-graphql/async-graphql"
+homepage = "https://github.com/aumetra/asynk-grafql"
 keywords = ["futures", "async", "graphql"]
 license = "MIT OR Apache-2.0"
-name = "async-graphql-parser"
-repository = "https://github.com/async-graphql/async-graphql"
+name = "asynk-grafql-parser"
+repository = "https://github.com/aumetra/asynk-grafql"
 version = "8.0.0-rc.4"
 
 [dependencies]
-async-graphql-value.workspace = true
+asynk-grafql-value.workspace = true
 pest = "2.7.11"
 serde.workspace = true
 serde_json.workspace = true

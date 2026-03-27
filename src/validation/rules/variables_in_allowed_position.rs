@@ -1,6 +1,6 @@
 use std::collections::{HashMap, HashSet};
 
-use async_graphql_value::Value;
+use asynk_grafql_value::Value;
 
 use crate::{
     Name, Pos, Positioned,

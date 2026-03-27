@@ -1,6 +1,6 @@
 Define a complex GraphQL object for SimpleObject's complex field resolver.
 
-*[See also the Book](https://async-graphql.github.io/async-graphql/en/define_simple_object.html).*
+*[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/define_simple_object.html).*
 
 Sometimes most of the fields of a GraphQL object simply return the value of the structure member, but a few
 fields are calculated. Usually we use the `Object` macro to define such a GraphQL object.
@@ -14,7 +14,7 @@ some simple fields, and use the `ComplexObject` macro to define some other field
 |---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|----------|
 | rename_fields | Rename all the fields according to the given case convention. The possible values are "lowercase", "UPPERCASE", "PascalCase", "camelCase", "snake_case", "SCREAMING_SNAKE_CASE".    | string | Y        |
 | rename_args   | Rename all the arguments according to the given case convention. The possible values are "lowercase", "UPPERCASE", "PascalCase", "camelCase", "snake_case", "SCREAMING_SNAKE_CASE". | string | Y        |
-| guard         | Field of guard *[See also the Book](https://async-graphql.github.io/async-graphql/en/field_guard.html)*                                                                             | string | Y        |
+| guard         | Field of guard *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/field_guard.html)*                                                                             | string | Y        |
 | inaccessible  | Indicate that an object is not accessible from a supergraph when using Apollo Federation                                                                                            | bool   | Y        |
 | tag           | Arbitrary string metadata that will be propagated to the supergraph when using Apollo Federation. This attribute is repeatable                                                      | string | Y        |
 
@@ -35,12 +35,12 @@ some simple fields, and use the `ComplexObject` macro to define some other field
 | inaccessible  | Indicate that a field is not accessible from a supergraph when using Apollo Federation                                                                                                                                                   | bool                                       | Y        |
 | tag           | Arbitrary string metadata that will be propagated to the supergraph when using Apollo Federation. This attribute is repeatable                                                                                                           | string                                     | Y        |
 | override_from | Mark the field as overriding a field currently present on another subgraph. It is used to migrate fields between subgraphs.                                                                                                              | string                                     | Y        |
-| guard         | Field of guard *[See also the Book](https://async-graphql.github.io/async-graphql/en/field_guard.html)*                                                                                                                                  | string                                     | Y        |
-| visible       | If `false`, it will not be displayed in introspection. *[See also the Book](https://async-graphql.github.io/async-graphql/en/visibility.html).*                                                                                          | bool                                       | Y        |
+| guard         | Field of guard *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/field_guard.html)*                                                                                                                                  | string                                     | Y        |
+| visible       | If `false`, it will not be displayed in introspection. *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/visibility.html).*                                                                                          | bool                                       | Y        |
 | visible       | Call the specified function. If the return value is `false`, it will not be displayed in introspection.                                                                                                                                  | string                                     | Y        |
-| complexity    | Custom field complexity. *[See also the Book](https://async-graphql.github.io/async-graphql/en/depth_and_complexity.html).*                                                                                                              | bool                                       | Y        |
+| complexity    | Custom field complexity. *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/depth_and_complexity.html).*                                                                                                              | bool                                       | Y        |
 | complexity    | Custom field complexity.                                                                                                                                                                                                                 | string                                     | Y        |
-| derived       | Generate derived fields *[See also the Book](https://async-graphql.github.io/async-graphql/en/derived_fields.html).*                                                                                                                     | object                                     | Y        |
+| derived       | Generate derived fields *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/derived_fields.html).*                                                                                                                     | object                                     | Y        |
 | flatten       | Similar to serde (flatten)                                                                                                                                                                                                               | boolean                                    | Y        |
 | directives    | Directives                                                                                                                                                                                                                               | expr                                       | Y        |
 
@@ -55,10 +55,10 @@ some simple fields, and use the `ComplexObject` macro to define some other field
 | default      | Use `Default::default` for default value                                                                                                        | none        | Y        |
 | default      | Argument default value                                                                                                                          | literal     | Y        |
 | default_with | Expression to generate default value                                                                                                            | code string | Y        |
-| validator    | Input value validator *[See also the Book](https://async-graphql.github.io/async-graphql/en/input_value_validators.html)*                       | object      | Y        |
+| validator    | Input value validator *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/input_value_validators.html)*                       | object      | Y        |
 | inaccessible | Indicate that a field argument is not accessible from a supergraph when using Apollo Federation                                                 | bool        | Y        |
 | tag          | Arbitrary string metadata that will be propagated to the supergraph when using Apollo Federation. This attribute is repeatable                  | string      | Y        |
-| visible      | If `false`, it will not be displayed in introspection. *[See also the Book](https://async-graphql.github.io/async-graphql/en/visibility.html).* | bool        | Y        |
+| visible      | If `false`, it will not be displayed in introspection. *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/visibility.html).* | bool        | Y        |
 | visible      | Call the specified function. If the return value is `false`, it will not be displayed in introspection.                                         | string      | Y        |
 | secret       | Mark this field as a secret, it will not output the actual value in the log.                                                                    | bool        | Y        |
 | process_with | Upon successful parsing, invokes specified function. Its signature must be `fn(&mut T)`.                                                        | code path   | Y        |
@@ -66,7 +66,7 @@ some simple fields, and use the `ComplexObject` macro to define some other field
 # Examples
 
 ```rust
-use async_graphql::*;
+use asynk_grafql::*;
 
 #[derive(SimpleObject)]
 #[graphql(complex)] // NOTE: If you want the `ComplexObject` macro to take effect, this `complex` attribute is required.

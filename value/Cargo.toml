@@ -1,13 +1,13 @@
 [package]
-name = "async-graphql-value"
+name = "asynk-grafql-value"
 version = "8.0.0-rc.4"
 authors = ["sunli <scott_s829@163.com>", "Koxiaet"]
 edition = "2024"
-description = "GraphQL value for async-graphql"
+description = "GraphQL value for asynk-grafql"
 license = "MIT OR Apache-2.0"
-documentation = "https://docs.rs/async-graphql/"
-homepage = "https://github.com/async-graphql/async-graphql"
-repository = "https://github.com/async-graphql/async-graphql"
+documentation = "https://docs.rs/asynk-grafql/"
+homepage = "https://github.com/aumetra/asynk-grafql"
+repository = "https://github.com/aumetra/asynk-grafql"
 keywords = ["futures", "async", "graphql"]
 categories = ["network-programming", "asynchronous"]
 

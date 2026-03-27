@@ -5,7 +5,7 @@ edition = "2024"
 publish = false
 
 [dependencies]
-async-graphql = { path = "../../.." }
+asynk-grafql = { path = "../../.." }
 merge-recursion-member-types = { path = "../member_types" }
 
 [dev-dependencies]

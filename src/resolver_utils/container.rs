@@ -20,7 +20,7 @@ pub trait ContainerType: OutputType {
     }
 
     /// Resolves a field value and outputs it as a json value
-    /// `async_graphql::Value`.
+    /// `asynk_grafql::Value`.
     ///
     /// If the field was not found returns None.
     fn resolve_field(

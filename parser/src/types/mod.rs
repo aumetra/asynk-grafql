@@ -15,7 +15,7 @@ use std::{
     fmt::{self, Display, Formatter, Write},
 };
 
-use async_graphql_value::{ConstValue, Name, Value};
+use asynk_grafql_value::{ConstValue, Name, Value};
 pub use executable::*;
 use serde::{Deserialize, Serialize};
 pub use service::*;

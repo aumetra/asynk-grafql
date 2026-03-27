@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 
-use async_graphql::*;
+use asynk_grafql::*;
 use futures_util::stream::Stream;
 
 #[tokio::test]

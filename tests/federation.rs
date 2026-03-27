@@ -6,7 +6,7 @@
 
 use std::{collections::HashMap, convert::Infallible};
 
-use async_graphql::{
+use asynk_grafql::{
     dataloader::{DataLoader, Loader},
     runtime::{TokioSpawner, TokioTimer},
     *,

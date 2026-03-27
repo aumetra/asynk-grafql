@@ -1,4 +1,4 @@
-use async_graphql_parser::*;
+use asynk_grafql_parser::*;
 
 #[test]
 fn test_recursion_limit() {

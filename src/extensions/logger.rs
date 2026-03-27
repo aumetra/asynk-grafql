@@ -35,7 +35,7 @@ impl Extension for LoggerExtension {
             .any(|(_, operation)| operation.node.selection_set.node.items.iter().any(|selection| matches!(&selection.node, Selection::Field(field) if field.node.name.node == "__schema")));
         if !is_schema {
             log::info!(
-                target: "async-graphql",
+                target: "asynk-grafql",
                 "[Execute] {}", ctx.stringify_execute_doc(&document, variables)
             );
         }
@@ -68,12 +68,12 @@ impl Extension for LoggerExtension {
                     }
 
                     log::info!(
-                        target: "async-graphql",
+                        target: "asynk-grafql",
                         "[Error] path={} message={}", path, err.message,
                     );
                 } else {
                     log::info!(
-                        target: "async-graphql",
+                        target: "asynk-grafql",
                         "[Error] message={}", err.message,
                     );
                 }

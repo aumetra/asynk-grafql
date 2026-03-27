@@ -2,15 +2,15 @@
 authors = ["sunli <scott_s829@163.com>", "Koxiaet"]
 categories = ["network-programming", "asynchronous"]
 description = "A GraphQL server library implemented in Rust"
-documentation = "https://docs.rs/async-graphql/"
+documentation = "https://docs.rs/asynk-grafql/"
 edition = "2024"
 rust-version = "1.89.0"
-homepage = "https://github.com/async-graphql/async-graphql"
+homepage = "https://github.com/aumetra/asynk-grafql"
 keywords = ["futures", "async", "graphql"]
 license = "MIT OR Apache-2.0"
-name = "async-graphql"
+name = "asynk-grafql"
 readme = "README.md"
-repository = "https://github.com/async-graphql/async-graphql"
+repository = "https://github.com/aumetra/asynk-grafql"
 version = "8.0.0-rc.4"
 
 [features]
@@ -32,16 +32,16 @@ uuid = ["dep:uuid"]
 tracing = ["dep:tracing", "dep:tracing-futures"]
 axum = ["dep:axum", "dep:tower-service", "dep:tokio-util", "dep:tokio-stream", "tokio"]
 graphiql = ["dep:askama"]
-raw_value = ["async-graphql-value/raw_value"]
+raw_value = ["asynk-grafql-value/raw_value"]
 
 [[bench]]
 harness = false
 name = "static_schema"
 
 [dependencies]
-async-graphql-derive.workspace = true
-async-graphql-parser.workspace = true
-async-graphql-value.workspace = true
+asynk-grafql-derive.workspace = true
+asynk-grafql-parser.workspace = true
+asynk-grafql-value.workspace = true
 
 
 asynk-strim = "0.1.5"
@@ -132,10 +132,10 @@ members = [
 ]
 
 [workspace.dependencies]
-async-graphql = { path = ".", version = "8.0.0-rc.4", default-features = false }
-async-graphql-derive = { path = "derive", version = "8.0.0-rc.4" }
-async-graphql-parser = { path = "parser", version = "8.0.0-rc.4" }
-async-graphql-value = { path = "value", version = "8.0.0-rc.4" }
+asynk-grafql = { path = ".", version = "8.0.0-rc.4", default-features = false }
+asynk-grafql-derive = { path = "derive", version = "8.0.0-rc.4" }
+asynk-grafql-parser = { path = "parser", version = "8.0.0-rc.4" }
+asynk-grafql-value = { path = "value", version = "8.0.0-rc.4" }
 
 
 serde = { version = "1.0.197", features = ["derive"] }

@@ -1,36 +1,35 @@
 <div align="center">
 <samp>
 
-# async-graphql
+# asynk-grafql
 
 **a high-performance graphql server library that's fully specification compliant**
 
 </samp>
 
-[Book](https://async-graphql.github.io/async-graphql/en/index.html) • [中文文档](https://async-graphql.github.io/async-graphql/zh-CN/index.html) • [Docs](https://docs.rs/async-graphql) • [GitHub repository](https://github.com/async-graphql/async-graphql) • [Cargo package](https://crates.io/crates/async-graphql)
+[Docs](https://docs.rs/asynk-grafql) • [GitHub repository](https://github.com/aumetra/asynk-grafql) • [Cargo package](https://crates.io/crates/asynk-grafql)
 
 ---
 
-![ci status](https://github.com/async-graphql/async-graphql/workflows/CI/badge.svg)
-[![code coverage](https://codecov.io/gh/async-graphql/async-graphql/branch/master/graph/badge.svg)](https://codecov.io/gh/async-graphql/async-graphql/)
+![ci status](https://github.com/aumetra/asynk-grafql/workflows/CI/badge.svg)
 [![Unsafe Rust forbidden](https://img.shields.io/badge/unsafe-forbidden-success.svg)](https://github.com/rust-secure-code/safety-dance/)
-[![Crates.io version](https://img.shields.io/crates/v/async-graphql.svg)](https://crates.io/crates/async-graphql)
-[![docs.rs docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://docs.rs/async-graphql)
-[![downloads](https://img.shields.io/crates/d/async-graphql.svg)](https://crates.io/crates/async-graphql)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/async-graphql/async-graphql/compare)
+[![Crates.io version](https://img.shields.io/crates/v/asynk-grafql.svg)](https://crates.io/crates/asynk-grafql)
+[![docs.rs docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://docs.rs/asynk-grafql)
+[![downloads](https://img.shields.io/crates/d/asynk-grafql.svg)](https://crates.io/crates/asynk-grafql)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/aumetra/asynk-grafql/compare)
 
 _This crate uses `#![forbid(unsafe_code)]` to ensure everything is implemented in 100% safe Rust._
 
 </div>
 
-## Static schema
+## Example
 
 ```rs
 use std::error::Error;
 
-use async_graphql::{http::GraphiQLSource, EmptyMutation, EmptySubscription, Object, Schema};
-use async_graphql_poem::*;
-use poem::{listener::TcpListener, web::Html, *};
+use asynk_grafql::{http::GraphiQLSource, EmptyMutation, EmptySubscription, Object, Schema};
+use asynk_grafql::http::GraphiQLSource;
+use axum::{Router, routing::get};
 
 struct Query;
 
@@ -41,80 +40,38 @@ impl Query {
     }
 }
 
-#[handler]
-async fn graphiql() -> impl IntoResponse {
-    Html(GraphiQLSource::build().finish())
-}
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    // create the schema
     let schema = Schema::build(Query, EmptyMutation, EmptySubscription).finish();
 
-    // start the http server
-    let app = Route::new().at("/", get(graphiql).post(GraphQL::new(schema)));
+    let app = Router::new().route(
+        "/",
+        get(|| async { axum::response::Html(GraphiQLSource::build().finish()) })
+            .post_service(asynk_grafql::http::GraphQL::new(schema)),
+    );
     println!("GraphiQL: http://localhost:8000");
-    Server::new(TcpListener::bind("0.0.0.0:8000"))
-        .run(app)
-        .await?;
-    Ok(())
-}
-```
-
-## Dynamic schema
-
-Requires the `dynamic-schema` feature to be enabled.
-
-```rs
-use std::error::Error;
-
-use async_graphql::{dynamic::*, http::GraphiQLSource};
-use async_graphql_poem::*;
-use poem::{listener::TcpListener, web::Html, *};
-
-#[handler]
-async fn graphiql() -> impl IntoResponse {
-    Html(GraphiQLSource::build().finish())
-}
-
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn Error>> {
-    let query = Object::new("Query").field(Field::new(
-        "howdy",
-        TypeRef::named_nn(TypeRef::STRING),
-        |_| FieldFuture::new(async { "partner" }),
-    ));
-
-    // create the schema
-    let schema = Schema::build(query, None, None).register(query).finish()?;
-
-    // start the http server
-    let app = Route::new().at("/", get(graphiql).post(GraphQL::new(schema)));
-    println!("GraphiQL: http://localhost:8000");
-    Server::new(TcpListener::bind("0.0.0.0:8000"))
-        .run(app)
-        .await?;
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8000").await?;
+    axum::serve(listener, app).await?;
     Ok(())
 }
 ```
 
 ## ⚠️Security
 
-I strongly recommend limiting the [complexity and depth](https://async-graphql.github.io/async-graphql/en/depth_and_complexity.html?highlight=complex#limiting-query-complexity) of queries in a production environment to avoid possible DDos attacks.
+I strongly recommend limiting the [complexity and depth](https://docs.rs/asynk-grafql/latest/asynk_grafql/struct.SchemaBuilder.html) of queries in a production environment to avoid possible DDos attacks.
 
-- [SchemaBuilder.limit_complexity](https://docs.rs/async-graphql/latest/async_graphql/struct.SchemaBuilder.html#method.limit_complexity)
-- [SchemaBuilder.limit_depth](https://docs.rs/async-graphql/latest/async_graphql/struct.SchemaBuilder.html#method.limit_depth)
-- [SchemaBuilder.limit_directives](https://docs.rs/async-graphql/latest/async_graphql/struct.SchemaBuilder.html#method.limit_directives)
+- [SchemaBuilder.limit_complexity](https://docs.rs/asynk-grafql/latest/asynk_grafql/struct.SchemaBuilder.html#method.limit_complexity)
+- [SchemaBuilder.limit_depth](https://docs.rs/asynk-grafql/latest/asynk_grafql/struct.SchemaBuilder.html#method.limit_depth)
+- [SchemaBuilder.limit_directives](https://docs.rs/asynk-grafql/latest/asynk_grafql/struct.SchemaBuilder.html#method.limit_directives)
 
 ## Features
 
-- Static and dynamic schemas are fully supported
 - Fully supports async/await
 - Type safety
 - Rustfmt friendly (Procedural Macro)
 - Custom scalars
 - Minimal overhead
-- Easy integration ([poem](https://crates.io/crates/poem), [axum](https://crates.io/crates/axum), [actix-web](https://crates.io/crates/actix-web), [warp](https://crates.io/crates/warp), [rocket](https://crates.io/crates/rocket) ...)
+- Built-in [axum](https://crates.io/crates/axum) integration
 - Upload files (Multipart request)
 - Subscriptions (WebSocket transport)
 - Custom extensions
@@ -127,93 +84,34 @@ I strongly recommend limiting the [complexity and depth](https://async-graphql.g
 
 > **Note**: Minimum supported Rust version: 1.86.0 or later
 
-## Examples
-
-All examples are in the [sub-repository](https://github.com/async-graphql/examples), located in the examples directory.
-
-```shell
-git submodule update # update the examples repo
-cd examples && cargo run --bin [name]
-```
-
-For more information, see the [sub-repository](https://github.com/async-graphql/examples) README.md.
-
 ## Integrations
 
-Integrations are what glue `async-graphql` with your web server, here are provided ones, or you can build your own!
+Integrations are what glue `asynk-grafql` with your web server.
 
-- Poem [async-graphql-poem](https://crates.io/crates/async-graphql-poem)
-- Actix-web [async-graphql-actix-web](https://crates.io/crates/async-graphql-actix-web)
-- Warp [async-graphql-warp](https://crates.io/crates/async-graphql-warp)
-- Rocket [async-graphql-rocket](https://github.com/async-graphql/async-graphql/tree/master/integrations/rocket)
-- Axum [async-graphql-axum](https://github.com/async-graphql/async-graphql/tree/master/integrations/axum)
+- Axum — built-in (enable the `axum` feature, on by default)
 
 ## Crate features
 
-This crate offers the following features. Most are not activated by default, except the integrations of GraphiQL (`graphiql`): 
+This crate offers the following features. Most are not activated by default, except `tempfile`, `graphiql`, and `axum`:
 
 | feature                        | enables                                                                                                                                                                                       |
 | :----------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`apollo_tracing`**           | Enable the [Apollo tracing extension](https://docs.rs/async-graphql/latest/async_graphql/extensions/struct.ApolloTracing.html).                                                               |
-| **`apollo_persisted_queries`** | Enable the [Apollo persisted queries extension](https://docs.rs/async-graphql/latest/async_graphql/extensions/apollo_persisted_queries/struct.ApolloPersistedQueries.html).                   |
-| **`boxed-trait`**              | Enables [`async-trait`](https://crates.io/crates/async-trait) for all traits.                                                                                                                 |
+| **`apollo_tracing`**           | Enable the [Apollo tracing extension](https://docs.rs/asynk-grafql/latest/asynk_grafql/extensions/struct.ApolloTracing.html).                                                               |
+| **`apollo_persisted_queries`** | Enable the [Apollo persisted queries extension](https://docs.rs/asynk-grafql/latest/asynk_grafql/extensions/apollo_persisted_queries/struct.ApolloPersistedQueries.html).                   |
+| **`axum`**                     | Enable the built-in [Axum](https://crates.io/crates/axum) integration (enabled by default).                                                                                                  |
 | **`dataloader`**               | Support [DataLoader](dataloader/struct.DataLoader.html).                                                                                                                                      |
 | **`decimal`**                  | Integrate with the [`rust_decimal` crate](https://crates.io/crates/rust_decimal).                                                                                                             |
-| **`dynamic-schema`**           | Support dynamic schema                                                                                                                                                                        |
-| **`graphiql`**                 | Enables the [GraphiQL IDE](https://github.com/graphql/graphiql) integration                                                                                                                   |
-| **`log`**                      | Enable the [Logger extension](https://docs.rs/async-graphql/latest/async_graphql/extensions/struct.Logger.html).                                                                              |
-| **`rawvalue`**                 | Support raw values from [`serde_json`](https://crates.io/crates/serde_json)                                                                                                                   |
+| **`graphiql`**                 | Enables the [GraphiQL IDE](https://github.com/graphql/graphiql) integration (enabled by default).                                                                                             |
+| **`jiff`**                     | Integrate with the [`jiff` crate](https://crates.io/crates/jiff).                                                                                                                             |
+| **`log`**                      | Enable the [Logger extension](https://docs.rs/asynk-grafql/latest/asynk_grafql/extensions/struct.Logger.html).                                                                              |
+| **`raw_value`**                | Support raw values from [`serde_json`](https://crates.io/crates/serde_json)                                                                                                                   |
 | **`secrecy`**                  | Integrate with the [`secrecy` crate](https://crates.io/crates/secrecy).                                                                                                                       |
 | **`string_number`**            | Enable the [StringNumber](types/struct.StringNumber.html).                                                                                                                                    |
 | **`time`**                     | Integrate with the [`time` crate](https://github.com/time-rs/time).                                                                                                                           |
-| **`tracing`**                  | Enable the [Tracing extension](https://docs.rs/async-graphql/latest/async_graphql/extensions/struct.Tracing.html).                                                                            |
-| **`tempfile`**                 | Save the uploaded content in the temporary file.                                                                                                                                              |
-| **`unblock`**                  | Support [Asynchronous reader for Upload](types/struct.Upload.html)                                                                                                                            |
+| **`tracing`**                  | Enable the [Tracing extension](https://docs.rs/asynk-grafql/latest/asynk_grafql/extensions/struct.Tracing.html).                                                                            |
+| **`tempfile`**                 | Save the uploaded content in the temporary file (enabled by default).                                                                                                                         |
 | **`uuid`**                     | Integrate with the [`uuid` crate](https://crates.io/crates/uuid).                                                                                                                             |
 | **`url`**                      | Integrate with the [`url` crate](https://crates.io/crates/url).                                                                                                                               |
-
-### Extra Extensions
-
-Additional extensions are available in the [`async-graphql-extras`](./extras) crate. These extensions require additional dependencies and are maintained separately.
-
-See the [extras crate README](./extras/README.md) for more information.
-
-### Observability
-
-One of the tools used to monitor your graphql server in production is Apollo Studio. Apollo Studio is a cloud platform that helps you build, monitor, validate, and secure your organization's data graph.
-Add the extension crate [`async_graphql_apollo_studio_extension`](https://github.com/async-graphql/async_graphql_apollo_studio_extension) to make this available.
-
-## Who's using `async-graphql` in production?
-
-- [Vector](https://vector.dev/)
-- [DiveDB](https://divedb.net)
-- [Kairos Sports tech](https://kairostech.io/)
-- [AxieInfinity](https://axieinfinity.com/)
-- [Nando's](https://www.nandos.co.uk/)
-- [Prima.it](https://www.prima.it/)
-- [VoxJar](https://voxjar.com/)
-- [Zenly](https://zen.ly/)
-- [Brevz](https://brevz.io/)
-- [thorndyke](https://www.thorndyke.ai/)
-- [My Data My Consent](https://mydatamyconsent.com/)
-
-## Community Showcase
-
-- [rust-actix-graphql-sqlx-postgresql](https://github.com/camsjams/rust-actix-graphql-sqlx-postgresql)
-  Using GraphQL with Rust and Apollo Federation
-- [entity-rs](https://github.com/chipsenkbeil/entity-rs) A simplistic framework based on TAO, Facebook's distributed database for Social Graph.
-- [vimwiki-server](https://github.com/chipsenkbeil/vimwiki-rs/tree/master/vimwiki-server) Provides graphql server to inspect and manipulate vimwiki files.
-- [Diana](https://github.com/arctic-hen7/diana) Diana is a GraphQL system for Rust that's designed to work as simply as possible out of the box, without sacrificing configuration ability.
-- [cindythink](https://www.cindythink.com/)
-- [sudograph](https://github.com/sudograph/sudograph)
-- [grpc_graphql_gateway](https://github.com/Protocol-Lattice/grpc_graphql_gateway) is an open-source protoc plugin that generates GraphQL execution server code from your gRPC/Protocol Buffers definitions.
-
-## Blog Posts
-
-- [Async GraphQL with Rust](https://formidable.com/blog/2022/async-graphql-with-rust-1/)
-- [GraphQL in Rust](https://romankudryashov.com/blog/2020/12/graphql-rust/)
-- [How to implement a Rust micro-service using Rocket, GraphQL, PostgreSQL](https://lionkeng.medium.com/how-to-implement-a-rust-micro-service-using-rocket-graphql-postgresql-a3f455f2ae8b)
-- [Running GraphQL on Lambda with Rust](https://dylananthony.com/posts/graphql-lambda-rust)
 
 ## References
 

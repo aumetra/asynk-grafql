@@ -1,4 +1,4 @@
-use async_graphql::*;
+use asynk_grafql::*;
 
 #[tokio::test]
 pub async fn test_batch_request() {

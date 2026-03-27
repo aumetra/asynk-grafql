@@ -7,7 +7,7 @@ type declaration as the GraphQL type description, you can use that derived macro
 # Examples
 
 ```rust
-use async_graphql::*;
+use asynk_grafql::*;
 
 /// This is MyObj
 #[derive(Description, Default)]

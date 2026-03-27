@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use async_graphql::*;
+use asynk_grafql::*;
 
 #[tokio::test]
 pub async fn test_variables() {

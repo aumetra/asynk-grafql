@@ -1,4 +1,4 @@
-use async_graphql_parser::types::Field;
+use asynk_grafql_parser::types::Field;
 
 use crate::{
     Positioned,

@@ -1,6 +1,6 @@
 use std::fmt::{Error, Result as FmtResult, Write};
 
-use async_graphql_value::ConstValue;
+use asynk_grafql_value::ConstValue;
 
 use crate::{
     Variables,

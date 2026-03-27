@@ -5,7 +5,7 @@ use std::{
     sync::Arc,
 };
 
-use async_graphql_parser::types::ExecutableDocument;
+use asynk_grafql_parser::types::ExecutableDocument;
 use futures_util::stream::{self, BoxStream, FuturesOrdered, StreamExt};
 
 use crate::{
@@ -127,7 +127,7 @@ impl<Query, Mutation, Subscription> SchemaBuilder<Query, Mutation, Subscription>
     /// # Examples
     ///
     /// ```rust
-    /// use async_graphql::*;
+    /// use asynk_grafql::*;
     ///
     /// struct Query;
     ///

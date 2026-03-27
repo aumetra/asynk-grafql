@@ -1,4 +1,4 @@
-use async_graphql_value::Value;
+use asynk_grafql_value::Value;
 use indexmap::map::IndexMap;
 
 use crate::{
@@ -23,7 +23,7 @@ impl<'a> Visitor<'a> for ArgumentsOfCorrectType<'a> {
         &mut self,
         ctx: &mut VisitorContext<'a>,
         name: Option<&'a Name>,
-        _operation_definition: &'a Positioned<async_graphql_parser::types::OperationDefinition>,
+        _operation_definition: &'a Positioned<asynk_grafql_parser::types::OperationDefinition>,
     ) {
         self.in_unselected_operation =
             ctx.operation_name

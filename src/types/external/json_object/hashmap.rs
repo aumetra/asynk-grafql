@@ -6,8 +6,8 @@ use std::{
     str::FromStr,
 };
 
-use async_graphql_parser::{Positioned, types::Field};
-use async_graphql_value::{from_value, to_value};
+use asynk_grafql_parser::{Positioned, types::Field};
+use asynk_grafql_value::{from_value, to_value};
 use indexmap::IndexMap;
 use serde::{Serialize, de::DeserializeOwned};
 

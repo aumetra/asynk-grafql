@@ -65,7 +65,7 @@ pub use self::tokio::{TokioSpawner, TokioTimer};
 
 /// Timing facilities required by parts of the crate
 ///
-/// The purpose is to make async-graphql integrate nicely with whatever
+/// The purpose is to make asynk-grafql integrate nicely with whatever
 /// environment you're in.
 ///
 /// Be it Tokio, smol, or even the browser.

@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 
-use async_graphql::*;
+use asynk_grafql::*;
 
 #[tokio::test]
 pub async fn test_error_extensions() {

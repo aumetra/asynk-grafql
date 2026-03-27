@@ -5,7 +5,7 @@
 //! overflow the compiler's recursion limit when types come from external
 //! crates. See: https://github.com/async-graphql/async-graphql/issues/1647
 
-use async_graphql::*;
+use asynk_grafql::*;
 use merge_recursion_merged_schema::Query;
 
 #[tokio::test]

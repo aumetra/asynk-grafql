@@ -7,7 +7,7 @@ It also implements `From<InnerType>` and `Into<InnerType>`.
 | Attribute                                    | description                                                                                                                                                            | Type   | Optional |
 |----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|----------|
 | name                                         | If this attribute is provided then define a new scalar, otherwise it is just a transparent proxy for the internal scalar.                                              | string | Y        |
-| visible(Only valid for new scalars)          | If `false`, it will not be displayed in introspection. *[See also the Book](https://async-graphql.github.io/async-graphql/en/visibility.html).*                        | bool   | Y        |
+| visible(Only valid for new scalars)          | If `false`, it will not be displayed in introspection. *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/visibility.html).*                        | bool   | Y        |
 | visible(Only valid for new scalars)          | Call the specified function. If the return value is `false`, it will not be displayed in introspection.                                                                | string | Y        |
 | specified_by_url(Only valid for new scalars) | Provide a specification URL for this scalar type, it must link to a human-readable specification of the data format, serialization and coercion rules for this scalar. | string | Y        |
 | inaccessible                                 | Indicate that an object is not accessible from a supergraph when using Apollo Federation                                                                               | bool   | Y        |
@@ -18,7 +18,7 @@ It also implements `From<InnerType>` and `Into<InnerType>`.
 ## Use the original scalar name
 
 ```rust
-use async_graphql::*;
+use asynk_grafql::*;
 
 #[derive(NewType)]
 struct Weight(f64);
@@ -74,7 +74,7 @@ assert_eq!(res, value!({
 ## Define a new scalar
 
 ```rust
-use async_graphql::*;
+use asynk_grafql::*;
 
 /// Widget NewType
 #[derive(NewType)]

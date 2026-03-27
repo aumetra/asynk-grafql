@@ -40,9 +40,9 @@ pub fn get_crate_path(crate_path: &Option<syn::Path>, internal: bool) -> syn::Pa
     } else if let Some(path) = crate_path {
         path.clone()
     } else {
-        let name = match crate_name("async-graphql") {
+        let name = match crate_name("asynk-grafql") {
             Ok(FoundCrate::Name(name)) => name,
-            Ok(FoundCrate::Itself) | Err(_) => "async_graphql".to_string(),
+            Ok(FoundCrate::Itself) | Err(_) => "asynk_grafql".to_string(),
         };
         let ident = Ident::new(&name, Span::call_site());
         parse_quote! { ::#ident }

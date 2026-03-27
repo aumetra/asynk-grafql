@@ -1,5 +1,5 @@
-use async_graphql::{EmptyMutation, EmptySubscription, SDLExportOptions, Schema, Subscription};
-use async_graphql_derive::{
+use asynk_grafql::{EmptyMutation, EmptySubscription, SDLExportOptions, Schema, Subscription};
+use asynk_grafql_derive::{
     ComplexObject, Enum, InputObject, Interface, Object, OneofObject, SimpleObject, TypeDirective,
 };
 use futures_util::{Stream, stream};
@@ -256,7 +256,7 @@ fn test_type_directive_2() {
 /// Some module docs
 #[deny(missing_docs)]
 pub mod test_type_directive_docs {
-    use async_graphql_derive::TypeDirective;
+    use asynk_grafql_derive::TypeDirective;
 
     /// Some directive docs
     #[TypeDirective(

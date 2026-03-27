@@ -1,7 +1,7 @@
 #![allow(clippy::uninlined_format_args)]
 #![allow(clippy::diverging_sub_expression)]
 
-use async_graphql::*;
+use asynk_grafql::*;
 
 use futures_util::stream::{self, Stream};
 

@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use async_graphql_value::{ConstValue, Value};
+use asynk_grafql_value::{ConstValue, Value};
 
 use crate::{QueryPathSegment, context::QueryPathNode, registry};
 

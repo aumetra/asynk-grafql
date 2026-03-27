@@ -1,6 +1,6 @@
 use std::{sync::Arc, time::Duration};
 
-use async_graphql::*;
+use asynk_grafql::*;
 use tokio::sync::Mutex;
 
 #[tokio::test]

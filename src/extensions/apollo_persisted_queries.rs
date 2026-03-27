@@ -2,7 +2,7 @@
 
 use std::sync::Arc;
 
-use async_graphql_parser::types::ExecutableDocument;
+use asynk_grafql_parser::types::ExecutableDocument;
 use serde::Deserialize;
 use sha2::{Digest, Sha256};
 
@@ -116,7 +116,7 @@ impl<T: CacheStorage> Extension for ApolloPersistedQueriesExtension<T> {
                 if persisted_query.sha256_hash != sha256_hash {
                     Err(ServerError::new("provided sha does not match query", None))
                 } else {
-                    let doc = async_graphql_parser::parse_query(&request.query)?;
+                    let doc = asynk_grafql_parser::parse_query(&request.query)?;
                     self.storage.set(sha256_hash, doc.clone()).await;
                     Ok(Request {
                         query: String::new(),

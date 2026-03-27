@@ -1,6 +1,6 @@
 Define a GraphQL object with methods
 
-*[See also the Book](https://async-graphql.github.io/async-graphql/en/define_complex_object.html).*
+*[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/define_complex_object.html).*
 
 All methods are converted to camelCase.
 
@@ -15,13 +15,13 @@ All methods are converted to camelCase.
 | extends              | Add fields to an entity that's defined in another service                                                                                                                           | bool                                       | Y        |
 | shareable            | Indicate that an object type's field is allowed to be resolved by multiple subgraphs                                                                                                | bool                                       | Y        |
 | use_type_description | Specifies that the description of the type is on the type declaration. [`Description`]()(derive.Description.html)                                                                   | bool                                       | Y        |
-| visible              | If `false`, it will not be displayed in introspection. *[See also the Book](https://async-graphql.github.io/async-graphql/en/visibility.html).*                                     | bool                                       | Y        |
+| visible              | If `false`, it will not be displayed in introspection. *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/visibility.html).*                                     | bool                                       | Y        |
 | visible              | Call the specified function. If the return value is `false`, it will not be displayed in introspection.                                                                             | string                                     | Y        |
 | inaccessible         | Indicate that an object is not accessible from a supergraph when using Apollo Federation                                                                                            | bool                                       | Y        |
 | tag                  | Arbitrary string metadata that will be propagated to the supergraph when using Apollo Federation. This attribute is repeatable                                                      | string                                     | Y        |
 | serial               | Resolve each field sequentially.                                                                                                                                                    | bool                                       | Y        |
 | concretes            | Specify how the concrete type of the generic SimpleObject should be implemented.                                                                                                    | ConcreteType                               | Y        |
-| guard                | Field of guard *[See also the Book](https://async-graphql.github.io/async-graphql/en/field_guard.html)*                                                                             | string                                     | Y        |
+| guard                | Field of guard *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/field_guard.html)*                                                                             | string                                     | Y        |
 | directives           | Directives                                                                                                                                                                          | expr                                       | Y        |
 
 # Field attributes
@@ -41,12 +41,12 @@ All methods are converted to camelCase.
 | inaccessible  | Indicate that a field is not accessible from a supergraph when using Apollo Federation                                                                                                                                                   | bool                                       | Y        |
 | tag           | Arbitrary string metadata that will be propagated to the supergraph when using Apollo Federation. This attribute is repeatable                                                                                                           | string                                     | Y        |
 | override_from | Mark the field as overriding a field currently present on another subgraph. It is used to migrate fields between subgraphs.                                                                                                              | string                                     | Y        |
-| guard         | Field of guard *[See also the Book](https://async-graphql.github.io/async-graphql/en/field_guard.html)*                                                                                                                                  | string                                     | Y        |
-| visible       | If `false`, it will not be displayed in introspection. *[See also the Book](https://async-graphql.github.io/async-graphql/en/visibility.html).*                                                                                          | bool                                       | Y        |
+| guard         | Field of guard *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/field_guard.html)*                                                                                                                                  | string                                     | Y        |
+| visible       | If `false`, it will not be displayed in introspection. *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/visibility.html).*                                                                                          | bool                                       | Y        |
 | visible       | Call the specified function. If the return value is `false`, it will not be displayed in introspection.                                                                                                                                  | string                                     | Y        |
-| complexity    | Custom field complexity. *[See also the Book](https://async-graphql.github.io/async-graphql/en/depth_and_complexity.html).*                                                                                                              | bool                                       | Y        |
+| complexity    | Custom field complexity. *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/depth_and_complexity.html).*                                                                                                              | bool                                       | Y        |
 | complexity    | Custom field complexity.                                                                                                                                                                                                                 | string                                     | Y        |
-| derived       | Generate derived fields *[See also the Book](https://async-graphql.github.io/async-graphql/en/derived_fields.html).*                                                                                                                     | object                                     | Y        |
+| derived       | Generate derived fields *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/derived_fields.html).*                                                                                                                     | object                                     | Y        |
 | flatten       | Similar to serde (flatten)                                                                                                                                                                                                               | boolean                                    | Y        |
 
 # Field argument attributes
@@ -60,8 +60,8 @@ All methods are converted to camelCase.
 | deprecation  | Argument deprecation reason                                                                                                                     | string      | Y        |
 | default      | Argument default value                                                                                                                          | literal     | Y        |
 | default_with | Expression to generate default value                                                                                                            | code string | Y        |
-| validator    | Input value validator *[See also the Book](https://async-graphql.github.io/async-graphql/en/input_value_validators.html)*                       | object      | Y        |
-| visible      | If `false`, it will not be displayed in introspection. *[See also the Book](https://async-graphql.github.io/async-graphql/en/visibility.html).* | bool        | Y        |
+| validator    | Input value validator *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/input_value_validators.html)*                       | object      | Y        |
+| visible      | If `false`, it will not be displayed in introspection. *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/visibility.html).* | bool        | Y        |
 | visible      | Call the specified function. If the return value is `false`, it will not be displayed in introspection.                                         | string      | Y        |
 | inaccessible | Indicate that an argument is not accessible from a supergraph when using Apollo Federation                                                      | bool        | Y        |
 | tag          | Arbitrary string metadata that will be propagated to the supergraph when using Apollo Federation. This attribute is repeatable                  | string      | Y        |
@@ -106,7 +106,7 @@ impl Query {
 Implements GraphQL Object for struct.
 
 ```rust
-use async_graphql::*;
+use asynk_grafql::*;
 
 struct Query {
     value: i32,
@@ -158,7 +158,7 @@ assert_eq!(res, value!({
 Implements GraphQL Object for trait object.
 
 ```rust
-use async_graphql::*;
+use asynk_grafql::*;
 
 trait MyTrait: Send + Sync {
     fn name(&self) -> &str;

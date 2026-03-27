@@ -1,6 +1,6 @@
 #![allow(clippy::uninlined_format_args)]
 
-use async_graphql::*;
+use asynk_grafql::*;
 
 #[tokio::test]
 pub async fn test_mut_args() {

@@ -1,4 +1,4 @@
-//! Value for GraphQL. Used in the [`async-graphql`](https://crates.io/crates/async-graphql) crate.
+//! Value for GraphQL. Used in the [`asynk-grafql`](https://crates.io/crates/asynk-grafql) crate.
 
 #![warn(missing_docs)]
 #![allow(clippy::uninlined_format_args)]

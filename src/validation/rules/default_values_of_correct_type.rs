@@ -1,4 +1,4 @@
-use async_graphql_parser::types::BaseType;
+use asynk_grafql_parser::types::BaseType;
 
 use crate::{
     Positioned, QueryPathSegment,

@@ -1,4 +1,4 @@
-//! A parser for GraphQL. Used in the [`async-graphql`](https://crates.io/crates/async-graphql)
+//! A parser for GraphQL. Used in the [`asynk-grafql`](https://crates.io/crates/asynk-grafql)
 //! crate.
 //!
 //! It uses the [pest](https://crates.io/crates/pest) crate to parse the input and then transforms
@@ -12,7 +12,7 @@
 
 use std::fmt::{self, Display, Formatter};
 
-use async_graphql_value::Name;
+use asynk_grafql_value::Name;
 pub use parse::{parse_query, parse_schema};
 use pest::{RuleType, error::LineColLocation};
 pub use pos::{Pos, Positioned};

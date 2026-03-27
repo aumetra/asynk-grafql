@@ -1,4 +1,4 @@
-use async_graphql_value::Value;
+use asynk_grafql_value::Value;
 use indexmap::map::IndexMap;
 
 use crate::{

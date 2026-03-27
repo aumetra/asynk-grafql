@@ -1,5 +1,5 @@
-use async_graphql_parser::types::{ExecutableDocument, OperationDefinition, VariableDefinition};
-use async_graphql_value::Name;
+use asynk_grafql_parser::types::{ExecutableDocument, OperationDefinition, VariableDefinition};
+use asynk_grafql_value::Name;
 
 use crate::{
     Positioned,
@@ -80,7 +80,7 @@ impl<'ctx> Visitor<'ctx> for ComplexityCalculate<'ctx, '_> {
 #[cfg(test)]
 #[allow(clippy::diverging_sub_expression)]
 mod tests {
-    use async_graphql_derive::SimpleObject;
+    use asynk_grafql_derive::SimpleObject;
     use futures_util::stream::BoxStream;
 
     use super::*;

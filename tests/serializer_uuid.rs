@@ -1,4 +1,4 @@
-use async_graphql::*;
+use asynk_grafql::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 #[serde(transparent)]
 struct AssetId(pub uuid::Uuid);
 
-async_graphql::scalar!(AssetId);
+asynk_grafql::scalar!(AssetId);
 
 #[tokio::test]
 /// Test case for

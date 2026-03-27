@@ -1,21 +1,21 @@
 [package]
 authors = ["sunli <scott_s829@163.com>", "Koxiaet"]
 categories = ["network-programming", "asynchronous"]
-description = "Macros for async-graphql"
-documentation = "https://docs.rs/async-graphql/"
+description = "Macros for asynk-grafql"
+documentation = "https://docs.rs/asynk-grafql/"
 edition = "2024"
-homepage = "https://github.com/async-graphql/async-graphql"
+homepage = "https://github.com/aumetra/asynk-grafql"
 keywords = ["futures", "async", "graphql"]
 license = "MIT OR Apache-2.0"
-name = "async-graphql-derive"
-repository = "https://github.com/async-graphql/async-graphql"
+name = "asynk-grafql-derive"
+repository = "https://github.com/aumetra/asynk-grafql"
 version = "8.0.0-rc.4"
 
 [lib]
 proc-macro = true
 
 [dependencies]
-async-graphql-parser.workspace = true
+asynk-grafql-parser.workspace = true
 
 darling = "0.23.0"
 heck = "0.5.0"

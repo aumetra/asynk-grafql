@@ -15,35 +15,35 @@ jobs:
       max-parallel: 1
       matrix:
         package:
-          - name: async-graphql-value
-            registryName: async-graphql-value
+          - name: asynk-grafql-value
+            registryName: asynk-grafql-value
             path: value
-          - name: async-graphql-parser
-            registryName: async-graphql-parser
+          - name: asynk-grafql-parser
+            registryName: asynk-grafql-parser
             path: parser
-          - name: async-graphql-derive
-            registryName: async-graphql-derive
+          - name: asynk-grafql-derive
+            registryName: asynk-grafql-derive
             path: derive
-          - name: async-graphql
-            registryName: async-graphql
+          - name: asynk-grafql
+            registryName: asynk-grafql
             path: .
-          - name: async-graphql-extras
-            registryName: async-graphql-extras
+          - name: asynk-grafql-extras
+            registryName: asynk-grafql-extras
             path: extras
-          - name: async-graphql-actix-web
-            registryName: async-graphql-actix-web
+          - name: asynk-grafql-actix-web
+            registryName: asynk-grafql-actix-web
             path: integrations/actix-web
-          - name: async-graphql-warp
-            registryName: async-graphql-warp
+          - name: asynk-grafql-warp
+            registryName: asynk-grafql-warp
             path: integrations/warp
-          - name: async-graphql-poem
-            registryName: async-graphql-poem
+          - name: asynk-grafql-poem
+            registryName: asynk-grafql-poem
             path: integrations/poem
-          - name: async-graphql-axum
-            registryName: async-graphql-axum
+          - name: asynk-grafql-axum
+            registryName: asynk-grafql-axum
             path: integrations/axum
-          - name: async-graphql-rocket
-            registryName: async-graphql-rocket
+          - name: asynk-grafql-rocket
+            registryName: asynk-grafql-rocket
             path: integrations/rocket
     steps:
       - uses: dtolnay/rust-toolchain@stable

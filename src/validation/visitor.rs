@@ -3,7 +3,7 @@ use std::{
     fmt::{self, Display, Formatter},
 };
 
-use async_graphql_value::Value;
+use asynk_grafql_value::Value;
 
 use crate::{
     InputType, Name, Pos, Positioned, ServerError, ServerResult, Variables,

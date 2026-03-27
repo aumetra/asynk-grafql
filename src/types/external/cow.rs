@@ -1,6 +1,6 @@
 use std::borrow::Cow;
 
-use async_graphql_parser::types::Field;
+use asynk_grafql_parser::types::Field;
 
 use crate::{ContextSelectionSet, OutputType, Positioned, ServerResult, Value, registry};
 

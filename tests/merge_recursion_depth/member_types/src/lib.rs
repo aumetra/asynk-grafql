@@ -7,7 +7,7 @@
 //! the compiler must compute the layout of the combined async state machine
 //! across crate boundaries, which amplifies monomorphization depth.
 
-use async_graphql::*;
+use asynk_grafql::*;
 
 macro_rules! define_leaf {
     ($name:ident, $field:ident) => {

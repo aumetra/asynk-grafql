@@ -3,7 +3,7 @@ use std::sync::{
     atomic::{AtomicI32, Ordering},
 };
 
-use async_graphql::{
+use asynk_grafql::{
     extensions::{
         Extension, ExtensionContext, ExtensionFactory, NextExecute, NextParseQuery,
         NextPrepareRequest, NextRequest, NextResolve, NextSubscribe, NextValidation, ResolveInfo,
@@ -12,7 +12,7 @@ use async_graphql::{
     parser::types::ExecutableDocument,
     *,
 };
-use async_graphql_value::ConstValue;
+use asynk_grafql_value::ConstValue;
 use futures_util::{StreamExt, lock::Mutex, stream::Stream};
 
 #[tokio::test]

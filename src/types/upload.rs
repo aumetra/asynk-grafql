@@ -85,10 +85,10 @@ impl UploadValue {
 ///
 ///
 /// # Example
-/// *[Full Example](<https://github.com/async-graphql/examples/blob/master/models/files/src/lib.rs>)*
+/// *[Full Example](<https://github.com/asynk-grafql/examples/blob/master/models/files/src/lib.rs>)*
 ///
 /// ```
-/// use async_graphql::*;
+/// use asynk_grafql::*;
 ///
 /// struct Mutation;
 ///

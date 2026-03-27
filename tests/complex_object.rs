@@ -1,6 +1,6 @@
 use core::marker::PhantomData;
 
-use async_graphql::*;
+use asynk_grafql::*;
 
 #[tokio::test]
 async fn test_complex_object_process_with_method_field() {

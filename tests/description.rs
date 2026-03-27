@@ -1,6 +1,6 @@
 #![allow(clippy::diverging_sub_expression)]
 
-use async_graphql::*;
+use asynk_grafql::*;
 
 #[tokio::test]
 pub async fn test_use_type_description() {

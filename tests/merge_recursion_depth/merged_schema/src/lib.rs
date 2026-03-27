@@ -6,7 +6,7 @@
 //! iteration. The cross-crate boundary forces the compiler to fully resolve
 //! type layouts during monomorphization, amplifying the recursion depth.
 
-use async_graphql::*;
+use asynk_grafql::*;
 use merge_recursion_member_types::*;
 
 #[rustfmt::skip] // otherwise many lines

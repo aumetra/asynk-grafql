@@ -125,7 +125,7 @@ pub async fn receive_batch_json(body: impl AsyncRead) -> Result<BatchRequest, Pa
 mod tests {
     use std::collections::HashMap;
 
-    use async_graphql_value::Extensions;
+    use asynk_grafql_value::Extensions;
 
     use super::*;
     use crate::{Variables, value};

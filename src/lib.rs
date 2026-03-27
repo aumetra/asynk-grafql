@@ -2,21 +2,21 @@
 //!
 //! <div align="center">
 //! <!-- CI -->
-//! <img src="https://github.com/async-graphql/async-graphql/workflows/CI/badge.svg" />
+//! <img src="https://github.com/aumetra/asynk-grafql/workflows/CI/badge.svg" />
 //! <!-- codecov -->
-//! <img src="https://codecov.io/gh/async-graphql/async-graphql/branch/master/graph/badge.svg" />
+//! <img src="https://codecov.io/gh/aumetra/asynk-grafql/branch/master/graph/badge.svg" />
 //! <!-- Crates version -->
-//! <a href="https://crates.io/crates/async-graphql">
-//! <img src="https://img.shields.io/crates/v/async-graphql.svg?style=flat-square"
+//! <a href="https://crates.io/crates/asynk-grafql">
+//! <img src="https://img.shields.io/crates/v/asynk-grafql.svg?style=flat-square"
 //! alt="Crates.io version" />
 //! </a>
 //! <!-- Downloads -->
-//! <a href="https://crates.io/crates/async-graphql">
-//! <img src="https://img.shields.io/crates/d/async-graphql.svg?style=flat-square"
+//! <a href="https://crates.io/crates/asynk-grafql">
+//! <img src="https://img.shields.io/crates/d/asynk-grafql.svg?style=flat-square"
 //! alt="Download" />
 //! </a>
 //! <!-- docs.rs docs -->
-//! <a href="https://docs.rs/async-graphql">
+//! <a href="https://docs.rs/asynk-grafql">
 //! <img src="https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square"
 //! alt="docs.rs docs" />
 //! </a>
@@ -28,11 +28,11 @@
 //!
 //! ## Documentation
 //!
-//! * [Book](https://async-graphql.github.io/async-graphql/en/index.html)
-//! * [中文文档](https://async-graphql.github.io/async-graphql/zh-CN/index.html)
-//! * [Docs](https://docs.rs/async-graphql)
-//! * [GitHub repository](https://github.com/async-graphql/async-graphql)
-//! * [Cargo package](https://crates.io/crates/async-graphql)
+//! * [Book](https://asynk-grafql.github.io/asynk-grafql/en/index.html)
+//! * [中文文档](https://asynk-grafql.github.io/asynk-grafql/zh-CN/index.html)
+//! * [Docs](https://docs.rs/asynk-grafql)
+//! * [GitHub repository](https://github.com/aumetra/asynk-grafql)
+//! * [Cargo package](https://crates.io/crates/asynk-grafql)
 //! * Minimum supported Rust version: 1.56.1 or later
 //!
 //! ## Features
@@ -42,8 +42,7 @@
 //! * Rustfmt friendly (Procedural Macro)
 //! * Custom scalars
 //! * Minimal overhead
-//! * Easy integration ([poem](https://crates.io/crates/poem), actix_web, warp,
-//!   rocket ...)
+//! * Built-in [axum](https://crates.io/crates/axum) integration
 //! * File upload (Multipart request)
 //! * Subscriptions (WebSocket transport)
 //! * Custom extensions
@@ -61,33 +60,26 @@
 //!
 //! | feature                        | enables                                                                                                                                                                                       |
 //! |:-------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-//! | **`apollo_tracing`**           | Enable the [Apollo tracing extension](https://docs.rs/async-graphql/latest/async_graphql/extensions/struct.ApolloTracing.html).                                                               |
-//! | **`apollo_persisted_queries`** | Enable the [Apollo persisted queries extension](https://docs.rs/async-graphql/latest/async_graphql/extensions/apollo_persisted_queries/struct.ApolloPersistedQueries.html).                   |
+//! | **`apollo_tracing`**           | Enable the [Apollo tracing extension](https://docs.rs/asynk-grafql/latest/asynk_grafql/extensions/struct.ApolloTracing.html).                                                               |
+//! | **`apollo_persisted_queries`** | Enable the [Apollo persisted queries extension](https://docs.rs/asynk-grafql/latest/asynk_grafql/extensions/apollo_persisted_queries/struct.ApolloPersistedQueries.html).                   |
 //! | **`dataloader`**               | Support [DataLoader](dataloader/struct.DataLoader.html).                                                                                                                                      |
 //! | **`decimal`**                  | Integrate with the [`rust_decimal` crate](https://crates.io/crates/rust_decimal).                                                                                                             |
-//! | **`dynamic-schema`**           | Support dynamic schema                                                                                                                                                                        |
-//! | **`fast_chemail`**             | Integrate with the [`fast_chemail` crate](https://crates.io/crates/fast_chemail).                                                                                                             |
-//! | **`graphiql`**                 | Enables the [GraphiQL IDE](https://github.com/graphql/graphiql) integration                                                                                                                   |
+//! | **`axum`**                     | Enable the built-in [Axum](https://crates.io/crates/axum) integration (enabled by default).                                                                                                  |
+//! | **`graphiql`**                 | Enables the [GraphiQL IDE](https://github.com/graphql/graphiql) integration (enabled by default).                                                                                             |
 //! | **`jiff`**                     | Integrate with the [`jiff` crate](https://crates.io/crates/jiff).                                                                                                                             |
-//! | **`log`**                      | Enable the [Logger extension](https://docs.rs/async-graphql/latest/async_graphql/extensions/struct.Logger.html).                                                                              |
-//! | **`opentelemetry`**            | Enable the [OpenTelemetry extension](https://docs.rs/async-graphql/latest/async_graphql/extensions/struct.OpenTelemetry.html).                                                                |
-//! | **`rawvalue`**                 | Support raw values from [`serde_json`](https://crates.io/crates/serde_json)                                                                                                                   |
+//! | **`log`**                      | Enable the [Logger extension](https://docs.rs/asynk-grafql/latest/asynk_grafql/extensions/struct.Logger.html).                                                                              |
+//! | **`raw_value`**                | Support raw values from [`serde_json`](https://crates.io/crates/serde_json)                                                                                                                   |
 //! | **`secrecy`**                  | Integrate with the [`secrecy` crate](https://crates.io/crates/secrecy).                                                                                                                       |
 //! | **`string_number`**            | Enable the [StringNumber](types/struct.StringNumber.html).                                                                                                                                    |
 //! | **`time`**                     | Integrate with the [`time` crate](https://github.com/time-rs/time).                                                                                                                           |
-//! | **`tracing`**                  | Enable the [Tracing extension](https://docs.rs/async-graphql/latest/async_graphql/extensions/struct.Tracing.html).                                                                            |
-//! | **`tempfile`**                 | Save the uploaded content in the temporary file.                                                                                                                                              |
-//! | **`unblock`**                  | Support [Asynchronous reader for Upload](types/struct.Upload.html)                                                                                                                            |
+//! | **`tracing`**                  | Enable the [Tracing extension](https://docs.rs/asynk-grafql/latest/asynk_grafql/extensions/struct.Tracing.html).                                                                            |
+//! | **`tempfile`**                 | Save the uploaded content in the temporary file (enabled by default).                                                                                                                         |
 //! | **`uuid`**                     | Integrate with the [`uuid` crate](https://crates.io/crates/uuid).                                                                                                                             |
 //! | **`url`**                      | Integrate with the [`url` crate](https://crates.io/crates/url).                                                                                                                               |
 //!
 //! ## Integrations
 //!
-//! * Poem [async-graphql-poem](https://crates.io/crates/async-graphql-poem)
-//! * Actix-web [async-graphql-actix-web](https://crates.io/crates/async-graphql-actix-web)
-//! * Warp [async-graphql-warp](https://crates.io/crates/async-graphql-warp)
-//! * Rocket [async-graphql-rocket](https://github.com/async-graphql/async-graphql/tree/master/integrations/rocket)
-//! * Axum [async-graphql-axum](https://github.com/async-graphql/async-graphql/tree/master/integrations/axum)
+//! * Axum — built-in (enable the `axum` feature, on by default)
 //!
 //! ## License
 //!
@@ -108,7 +100,7 @@
 //!
 //! ## Examples
 //!
-//! All examples are in the [sub-repository](https://github.com/async-graphql/examples), located in the examples directory.
+//! All examples are in the [sub-repository](https://github.com/asynk-grafql/examples), located in the examples directory.
 //!
 //! **Run an example:**
 //!
@@ -199,8 +191,8 @@ pub mod validators;
 #[doc(hidden)]
 pub mod registry;
 
-pub use async_graphql_parser as parser;
-pub use async_graphql_value::{
+pub use asynk_grafql_parser as parser;
+pub use asynk_grafql_value::{
     ConstValue as Value, DeserializerError, Extensions, Name, Number, SerializerError, Variables,
     from_value, to_value, value,
 };
@@ -241,42 +233,42 @@ pub use types::*;
 pub use validation::{ValidationMode, ValidationResult, VisitorContext};
 pub use validators::CustomValidator;
 
-/// An alias of [async_graphql::Error](struct.Error.html). Present for backward
+/// An alias of [asynk_grafql::Error](struct.Error.html). Present for backward
 /// compatibility reasons.
 pub type FieldError = Error;
 
-/// An alias of [async_graphql::Result](type.Result.html). Present for backward
+/// An alias of [asynk_grafql::Result](type.Result.html). Present for backward
 /// compatibility reasons.
 pub type FieldResult<T> = Result<T>;
 
 #[doc = include_str!("docs/complex_object.md")]
-pub use async_graphql_derive::ComplexObject;
+pub use asynk_grafql_derive::ComplexObject;
 #[doc = include_str!("docs/description.md")]
-pub use async_graphql_derive::Description;
+pub use asynk_grafql_derive::Description;
 #[doc = include_str!("docs/directive.md")]
-pub use async_graphql_derive::Directive;
+pub use asynk_grafql_derive::Directive;
 #[doc = include_str!("docs/enum.md")]
-pub use async_graphql_derive::Enum;
+pub use asynk_grafql_derive::Enum;
 #[doc = include_str!("docs/input_object.md")]
-pub use async_graphql_derive::InputObject;
+pub use asynk_grafql_derive::InputObject;
 #[doc = include_str!("docs/interface.md")]
-pub use async_graphql_derive::Interface;
+pub use asynk_grafql_derive::Interface;
 #[doc = include_str!("docs/merged_object.md")]
-pub use async_graphql_derive::MergedObject;
+pub use asynk_grafql_derive::MergedObject;
 #[doc = include_str!("docs/merged_subscription.md")]
-pub use async_graphql_derive::MergedSubscription;
+pub use asynk_grafql_derive::MergedSubscription;
 #[doc = include_str!("docs/newtype.md")]
-pub use async_graphql_derive::NewType;
+pub use asynk_grafql_derive::NewType;
 #[doc = include_str!("docs/object.md")]
-pub use async_graphql_derive::Object;
+pub use asynk_grafql_derive::Object;
 #[doc = include_str!("docs/oneof_object.md")]
-pub use async_graphql_derive::OneofObject;
+pub use asynk_grafql_derive::OneofObject;
 #[doc = include_str!("docs/scalar.md")]
-pub use async_graphql_derive::Scalar;
+pub use asynk_grafql_derive::Scalar;
 #[doc = include_str!("docs/simple_object.md")]
-pub use async_graphql_derive::SimpleObject;
+pub use asynk_grafql_derive::SimpleObject;
 #[doc = include_str!("docs/subscription.md")]
-pub use async_graphql_derive::Subscription;
-pub use async_graphql_derive::TypeDirective;
+pub use asynk_grafql_derive::Subscription;
+pub use asynk_grafql_derive::TypeDirective;
 #[doc = include_str!("docs/union.md")]
-pub use async_graphql_derive::Union;
+pub use asynk_grafql_derive::Union;

@@ -3,7 +3,7 @@ use std::{
     ops::{Deref, DerefMut},
 };
 
-use async_graphql_value::ConstValue;
+use asynk_grafql_value::ConstValue;
 use serde::{Deserialize, Serialize};
 
 use crate::{InputValueError, InputValueResult, Scalar, ScalarType, Value};

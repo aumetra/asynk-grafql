@@ -4,7 +4,7 @@ use std::{
     sync::{Arc, Weak},
 };
 
-use async_graphql_value::ConstValue;
+use asynk_grafql_value::ConstValue;
 
 use crate::{
     ContainerType, Context, ContextSelectionSet, Error, InputValueError, InputValueResult,
@@ -84,7 +84,7 @@ pub trait OutputType: Send + Sync {
     /// Create type information in the registry and return qualified typename.
     fn create_type_info(registry: &mut registry::Registry) -> String;
 
-    /// Resolve an output value to `async_graphql::Value`.
+    /// Resolve an output value to `asynk_grafql::Value`.
     fn resolve(
         &self,
         ctx: &ContextSelectionSet<'_>,

@@ -1,4 +1,4 @@
-use async_graphql::{http::WebSocketProtocols, *};
+use asynk_grafql::{http::WebSocketProtocols, *};
 use futures_channel::mpsc;
 use futures_util::{
     SinkExt,

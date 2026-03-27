@@ -5,7 +5,7 @@ use std::{
     collections::{BTreeSet, HashSet, LinkedList, VecDeque},
 };
 
-use async_graphql::*;
+use asynk_grafql::*;
 
 #[tokio::test]
 pub async fn test_list_type() {

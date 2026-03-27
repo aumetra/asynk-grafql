@@ -3,12 +3,12 @@
 //! # Examples
 //!
 //! ```rust
-//! use async_graphql::*;
-//! use async_graphql::dataloader::*;
+//! use asynk_grafql::*;
+//! use asynk_grafql::dataloader::*;
 //! use std::collections::{HashSet, HashMap};
 //! use std::convert::Infallible;
-//! use async_graphql::dataloader::Loader;
-//! use async_graphql::runtime::{TokioSpawner, TokioTimer};
+//! use asynk_grafql::dataloader::Loader;
+//! use asynk_grafql::runtime::{TokioSpawner, TokioTimer};
 //!
 //! /// This loader simply converts the integer key into a string value.
 //! struct MyLoader;

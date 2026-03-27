@@ -1,4 +1,4 @@
-use async_graphql::*;
+use asynk_grafql::*;
 use futures_util::stream::{Stream, StreamExt};
 
 #[derive(SimpleObject)]

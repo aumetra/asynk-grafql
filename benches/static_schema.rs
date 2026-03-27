@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use async_graphql::{
+use asynk_grafql::{
     Context, Enum, Error, Interface, Object, OutputType, Result,
     connection::{Connection, Edge, query},
     *,

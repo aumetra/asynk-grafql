@@ -13,7 +13,7 @@ use crate::{
 /// # Examples
 ///
 /// ```rust
-/// use async_graphql::*;
+/// use asynk_grafql::*;
 ///
 /// struct Query;
 ///

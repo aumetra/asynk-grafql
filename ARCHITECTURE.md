@@ -1,6 +1,6 @@
-# async-graphql Architecture
+# asynk-grafql Architecture
 
-This document describes the internal architecture of `async-graphql`, and can be useful to
+This document describes the internal architecture of `asynk-grafql`, and can be useful to
 people wanting to contribute.
 
 ## Schema
@@ -12,7 +12,7 @@ every single type that is used has been registered in the registry.
 
 ## Query Execution
 
-First of all, `async-graphql` will use the `async-graphql-parser` crate (located in the `parser/`
+First of all, `asynk-grafql` will use the `asynk-grafql-parser` crate (located in the `parser/`
 directory) to parse the request document source. This also performs some necessary validations
 such as making sure that operation (i.e. query/mutation/subscription) names are unique and that the
 query does not contain an anonymous operation as well as a named one.
@@ -30,7 +30,7 @@ we will execute just one.
 
 At the core of all the resolver logic there are two traits: `InputType` and `OutputType`
 which represent a GraphQL input value and GraphQL output value respectively. `InputType` just
-requires conversions to and from `async_graphql::Value`. `OutputType` is an async trait with a
+requires conversions to and from `asynk_grafql::Value`. `OutputType` is an async trait with a
 single method, `resolve`, which takes a field (e.g. `user(name: "sunli829") { display_name }`) and
 resolves it to a single value.
 

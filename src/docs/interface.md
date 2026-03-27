@@ -1,18 +1,18 @@
 Define a GraphQL interface
 
-*[See also the Book](https://async-graphql.github.io/async-graphql/en/define_interface.html).*
+*[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/define_interface.html).*
 
 # Macro attributes
 
 | Attribute     | description                                                                                                                                                                         | Type           | Optional |
 |---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|----------|
 | name          | Object name                                                                                                                                                                         | string         | Y        |
-| name_type     | If `true`, the interface name will be specified from [`async_graphql::TypeName`](https://docs.rs/async-graphql/latest/async_graphql/trait.TypeName.html) trait                      | bool           | Y        |
+| name_type     | If `true`, the interface name will be specified from [`asynk_grafql::TypeName`](https://docs.rs/asynk-grafql/latest/asynk_grafql/trait.TypeName.html) trait                      | bool           | Y        |
 | rename_fields | Rename all the fields according to the given case convention. The possible values are "lowercase", "UPPERCASE", "PascalCase", "camelCase", "snake_case", "SCREAMING_SNAKE_CASE".    | string         | Y        |
 | rename_args   | Rename all the arguments according to the given case convention. The possible values are "lowercase", "UPPERCASE", "PascalCase", "camelCase", "snake_case", "SCREAMING_SNAKE_CASE". | string         | Y        |
 | field         | Fields of this Interface                                                                                                                                                            | InterfaceField | N        |
 | extends       | Add fields to an entity that's defined in another service                                                                                                                           | bool           | Y        |
-| visible       | If `false`, it will not be displayed in introspection. *[See also the Book](https://async-graphql.github.io/async-graphql/en/visibility.html).*                                     | bool           | Y        |
+| visible       | If `false`, it will not be displayed in introspection. *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/visibility.html).*                                     | bool           | Y        |
 | visible       | Call the specified function. If the return value is `false`, it will not be displayed in introspection.                                                                             | string         | Y        |
 | inaccessible  | Indicate that an interface is not accessible from a supergraph when using Apollo Federation                                                                                         | bool           | Y        |
 | tag           | Arbitrary string metadata that will be propagated to the supergraph when using Apollo Federation. This attribute is repeatable                                                      | string         | Y        |
@@ -33,7 +33,7 @@ Define a GraphQL interface
 | provides      | Annotate the expected returned fieldset from a field on a base type that is guaranteed to be selectable by the gateway.                                                                                                                  | string                 | Y        |
 | requires      | Annotate the required input fieldset from a base type for a resolver. It is used to develop a query plan where the required fields may not be needed by the client, but the service may need additional information from other services. | string                 | Y        |
 | override_from | Mark the field as overriding a field currently present on another subgraph. It is used to migrate fields between subgraphs.                                                                                                              | string                 | Y        |
-| visible       | If `false`, it will not be displayed in introspection. *[See also the Book](https://async-graphql.github.io/async-graphql/en/visibility.html).*                                                                                          | bool                   | Y        |
+| visible       | If `false`, it will not be displayed in introspection. *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/visibility.html).*                                                                                          | bool                   | Y        |
 | visible       | Call the specified function. If the return value is `false`, it will not be displayed in introspection.                                                                                                                                  | string                 | Y        |
 | inaccessible  | Indicate that a field is not accessible from a supergraph when using Apollo Federation                                                                                                                                                   | bool                   | Y        |
 | tag           | Arbitrary string metadata that will be propagated to the supergraph when using Apollo Federation. This attribute is repeatable                                                                                                           | string                 | Y        |
@@ -51,7 +51,7 @@ Define a GraphQL interface
 | default      | Use `Default::default` for default value                                                                                                        | none        | Y        |
 | default      | Argument default value                                                                                                                          | literal     | Y        |
 | default_with | Expression to generate default value                                                                                                            | code string | Y        |
-| visible      | If `false`, it will not be displayed in introspection. *[See also the Book](https://async-graphql.github.io/async-graphql/en/visibility.html).* | bool        | Y        |
+| visible      | If `false`, it will not be displayed in introspection. *[See also the Book](https://asynk-grafql.github.io/asynk-grafql/en/visibility.html).* | bool        | Y        |
 | visible      | Call the specified function. If the return value is `false`, it will not be displayed in introspection.                                         | string      | Y        |
 | secret       | Mark this field as a secret, it will not output the actual value in the log.                                                                    | bool        | Y        |
 | inaccessible | Indicate that an argument is not accessible from a supergraph when using Apollo Federation                                                      | bool        | Y        |
@@ -79,7 +79,7 @@ The type, name, and parameter fields of the interface must exactly match the typ
 implementation interface, but Result can be omitted.
 
 ```rust
-use async_graphql::*;
+use asynk_grafql::*;
 
 struct TypeA {
     value: i32,
