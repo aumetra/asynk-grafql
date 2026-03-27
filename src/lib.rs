@@ -185,12 +185,12 @@ mod subscription;
 mod validation;
 
 pub mod context;
+#[cfg(feature = "axum")]
+#[cfg_attr(docsrs, doc(cfg(feature = "axum")))]
+pub mod axum;
 #[cfg(feature = "dataloader")]
 #[cfg_attr(docsrs, doc(cfg(feature = "dataloader")))]
 pub mod dataloader;
-#[cfg(feature = "dynamic-schema")]
-#[cfg_attr(docsrs, doc(cfg(feature = "dynamic-schema")))]
-pub mod dynamic;
 pub mod extensions;
 pub mod http;
 pub mod resolver_utils;

@@ -20,7 +20,7 @@ chrono = ["dep:chrono"]
 chrono-duration = ["dep:chrono", "dep:iso8601"]
 dataloader = ["dep:futures-channel", "dep:lru", "dep:scc"]
 decimal = ["dep:rust_decimal"]
-default = ["dynamic-schema", "tempfile", "graphiql"]
+default = ["tempfile", "graphiql", "axum"]
 log = ["dep:log"]
 
 jiff = ["dep:jiff"]
@@ -32,7 +32,7 @@ tokio = ["dep:tokio"]
 url = ["dep:url"]
 uuid = ["dep:uuid"]
 tracing = ["dep:tracing", "dep:tracing-futures"]
-dynamic-schema = []
+axum = ["dep:axum", "dep:tower-service", "dep:tokio-util", "dep:tokio-stream", "tokio"]
 graphiql = ["dep:askama"]
 raw_value = ["async-graphql-value/raw_value"]
 boxed-trait = ["async-graphql-derive/boxed-trait"]
@@ -89,6 +89,10 @@ time = { version = "0.3.36", optional = true, features = [
   "macros",
 ] }
 tokio = { version = "1.37.0", features = ["rt", "time"], optional = true }
+axum = { version = "0.8.1", features = ["ws"], optional = true }
+tower-service = { version = "0.3", optional = true }
+tokio-util = { version = "0.7.10", optional = true, features = ["io", "compat"] }
+tokio-stream = { version = "0.1.15", optional = true }
 tracing-futures = { version = "0.2.5", optional = true, features = [
   "std-future",
   "futures-03",
@@ -132,13 +136,6 @@ members = [
   "value",
   "parser",
   "derive",
-  "integrations/poem",
-  "integrations/actix-web",
-  "integrations/rocket",
-  "integrations/warp",
-  "integrations/axum",
-  "extras",
-  "docs/book-tests",
   "tests/merge_recursion_depth/member_types",
   "tests/merge_recursion_depth/merged_schema",
 ]
